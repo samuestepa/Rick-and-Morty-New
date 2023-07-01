@@ -9,7 +9,7 @@ const Nav = ({onSearch, setAccess}) => {
 
    return (
       <nav className="navContainer">
-      <SearchBar onSearch={onSearch} className="searchBar" />
+      <SearchBar onSearch={onSearch} className="searchBar"/>
       <div className="navLinks">
          <Link to="/about">About</Link>
          <Link to="/home">Home</Link>

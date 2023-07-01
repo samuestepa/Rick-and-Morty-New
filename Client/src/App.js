@@ -20,10 +20,14 @@ function App() {
 
 
    const login = (userData) => {
-      if (userData.email === email && userData.password === password) {
-         setAccess(true);
-         navigate('/home');
-      }
+      const { email, password } = userData;
+      const URL = 'http://localhost:3001/rickandmorty/login/';
+      axios(URL + `?email=${email}&password=${password}`)
+      .then(({ data }) => {
+         const { access } = data;
+         setAccess(access);
+         access && navigate('/home');
+      });
    }
 
    useEffect(() => {
@@ -34,7 +38,7 @@ function App() {
       axios(`http://localhost:3001/rickandmorty/character/${id}`)
       .then(response => response.data)
       .then((data) => {
-         if (data.name) {
+         if (data.id) {
              setCharacters((oldChars) => [...oldChars, data]);
             } else {
             alert('¡No hay personajes con este ID!');
@@ -46,7 +50,7 @@ function App() {
    }
 
    const onClose = (id) => {
-      const charactersFiltered = characters.filter(characters => characters.id !== Number(id))
+      const charactersFiltered = characters.filter(characters => characters.id !== +id)
       setCharacters(charactersFiltered)
    }
 
