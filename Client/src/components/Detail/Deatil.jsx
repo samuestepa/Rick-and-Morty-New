@@ -7,7 +7,7 @@ const Deatil = () => {
     const [character, setCharacter] = useState({})
 
     useEffect(() => {
-      axios(`http://localhost:3001/rickandmorty/character/${id}`)
+      axios(`https://rickandmortyapi.com/api/character/${id}`)
       .then(({ data }) => {
           if (data.name) {
             setCharacter(data);
@@ -26,7 +26,7 @@ const Deatil = () => {
            <h2>{character?.species}</h2>
            <h2>{character?.gender}</h2>
            <h2>{character?.origin?.name}</h2>
-           <img src={character?.image} alt={character.name}/>
+           <img src={character?.image} alt={character?.name}/>
         </div>
     )
 }

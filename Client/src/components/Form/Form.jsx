@@ -39,7 +39,7 @@ const Form = ({ login }) => {
                     <br />
                     
                         <label htmlFor="password">Password </label>
-                        <input type="text" name= 'password' placeholder="incorrecta" value={userData.password} 
+                        <input type="text" name= 'password' placeholder="123456" value={userData.password} 
                         onChange={handleChange}/>
                         {error.password && <p>{error.password}</p>}
                     <br />

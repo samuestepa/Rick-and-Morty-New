@@ -16,7 +16,9 @@ const reducer = (state = initialState, {type, payload}) => {
     case REMOVE_FAV:
       return { 
         ...state, 
-        myFavorites: payload 
+        myFavorites: payload,
+        allCharacters: payload 
+
     }
     case FILTER:
         const allCharactersFavFiltered = state.allCharactersFav.filter(character => character.gender === payload)

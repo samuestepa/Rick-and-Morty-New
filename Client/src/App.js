@@ -9,8 +9,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Routes, Route, useLocation, useNavigate} from 'react-router-dom';
 
-const email = 'samuestepa@gmail.com';
-const password = '123456';
+const URL = 'http://localhost:3001/rickandmorty/login/';
 
 function App() {
    const location = useLocation();
@@ -19,53 +18,57 @@ function App() {
    const [access, setAccess] = useState(false);
 
 
-   const login = (userData) => {
-      const { email, password } = userData;
-      const URL = 'http://localhost:3001/rickandmorty/login/';
-      axios(URL + `?email=${email}&password=${password}`)
-      .then(({ data }) => {
+   const login = async (userData) => {
+
+      try {
+         const { email, password } = userData;
+         
+         const { data } = await axios(URL + `?email=${email}&password=${password}`)
          const { access } = data;
+         
          setAccess(access);
          access && navigate('/home');
-      });
+         
+      } catch (error) {
+         console.log(error.message)
+      }
+
    }
 
    useEffect(() => {
       !access && navigate('/')
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [access]);
 
-   const onSearch = (id) => {
-      axios(`http://localhost:3001/rickandmorty/character/${id}`)
-      .then(response => response.data)
-      .then((data) => {
-         if (data.id) {
-             setCharacters((oldChars) => [...oldChars, data]);
-            } else {
-            alert('¡No hay personajes con este ID!');
-         }
-      })
-      .catch((error) => {
-         console.log(error)
-      });
+   const onSearch = async (id) => {
+      try {
+         const { data } = await axios(`http://localhost:3001/rickandmorty/character/${id}`)
+         
+         if(data.name){
+            return setCharacters((oldChars) => [...oldChars, data]);
+         } 
+           
+      } catch (error) {
+            alert('¡No hay personajes con este ID!') 
+        }
    }
 
    const onClose = (id) => {
-      const charactersFiltered = characters.filter(characters => characters.id !== +id)
+      const charactersFiltered = characters.filter(character => character.id !== +id)
       setCharacters(charactersFiltered)
    }
 
    return (
       <div className='App'>
-         <div className='particles-containter'></div>
          {
-            location.pathname !== '/' && <Nav onSearch = { onSearch } access = {access} setAccess = {setAccess}/>
+            location.pathname !== '/' && <Nav onSearch = { onSearch } />
          }
 
          <Routes>
             <Route path = '/' element = {<Form login = { login }/>}/>
             <Route path = '/home' element = {<Cards characters={characters} onClose = { onClose }/>}/>
             <Route path = '/about' element = {<About/>}/>
-            <Route path = '/home/detail/:id' element = {<Deatil/>}/>
+            <Route path = '/detail/:id' element = {<Deatil/>}/>
             <Route path=    '/favorites' element = { <Favorites/>}/>
          </Routes>
       </div>

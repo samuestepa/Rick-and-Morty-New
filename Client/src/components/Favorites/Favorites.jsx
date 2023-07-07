@@ -1,8 +1,7 @@
 import Card from '../Card/Card';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { useState } from 'react'
 import { filterCards, orderCards } from '../../redux/actions';
-import { useDispatch } from 'react-redux';
 
 const Favorites = ({ myFavorites }) => { //myFavorites viene de mapStateToProps
 
@@ -11,7 +10,7 @@ const Favorites = ({ myFavorites }) => { //myFavorites viene de mapStateToProps
 
     const handleOrder = (event) => {
         dispatch(orderCards(event.target.value));
-          setAux(true);
+        setAux(true);
     }
 
     const handleFilter = (event) => {

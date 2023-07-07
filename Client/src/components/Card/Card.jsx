@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { useState, useEffect } from 'react';  
 import style from '../../styles/Card.css'
 
- function Card({onClose, id, name, species, gender, image, addFav, removeFav, myFavorites}) {
+ function Card({onClose, id, name, species, gender, status, origin, image, addFav, removeFav, myFavorites}) {
 
     const [isFav, setIsFav] = useState(false);
     
@@ -15,7 +15,7 @@ import style from '../../styles/Card.css'
        }
      else {
       setIsFav(true);
-      addFav({id, name, species, gender, image, onClose})
+      addFav({id, name, status, species, gender, origin, image, onClose})
     }
    }
 
@@ -28,21 +28,17 @@ import style from '../../styles/Card.css'
    }, [myFavorites]);
 
    return (
-      <div className='containter'>
-         <Link to = {`detail/${id}`}>
-            <h2 className='name'>{name}</h2>
+      <div key={id} className={style.contenedor}>
+         
+         <button onClick={handleFavorite}>{isFav ? "❤️":"🤍"}</button>
+         <button onClick={() => onClose(id)}>X</button>
+         <Link to={`/detail/${id}`}>
+            <h2 className="card-name">{name}</h2>
          </Link>
-         <div className='detail'>
-            <h2>Species: {species}</h2>
-            <h2>Gender: {gender}</h2>
-         </div>
-         <img src={image} alt={name} className='img'/>
-         <div className='button'>
-            <button onClick={() => onClose(id)}>X</button>
-         </div>
-         <div className='simbols'>
-            <button onClick={handleFavorite}>{isFav ? '❤️' : '🤍'}</button>
-         </div>
+         <h2>{status}</h2>
+         <h2>{species}</h2>
+         <h2>{gender}</h2>
+         <img className={style.imgCard} src={image} alt={name} />
       </div>
    );
 }
