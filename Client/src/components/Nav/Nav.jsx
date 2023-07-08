@@ -10,11 +10,9 @@ const Nav = ({onSearch, setAccess}) => {
    return (
       <nav className="navContainer">
       <SearchBar onSearch={onSearch} className="searchBar"/>
-      <div className="navLinks">
-         <Link to="/about">About</Link>
+         <Link to="/about">About</Link>   
          <Link to="/home">Home</Link>
          <Link to="/favorites">Favorites</Link>
-      </div>
       <button onClick={handleLogOut} className="logoutButton">
          Log Out
       </button>

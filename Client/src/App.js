@@ -69,7 +69,7 @@ function App() {
             <Route path = '/home' element = {<Cards characters={characters} onClose = { onClose }/>}/>
             <Route path = '/about' element = {<About/>}/>
             <Route path = '/detail/:id' element = {<Deatil/>}/>
-            <Route path=    '/favorites' element = { <Favorites/>}/>
+            <Route path = '/favorites' element = { <Favorites/>}/>
          </Routes>
       </div>
    );

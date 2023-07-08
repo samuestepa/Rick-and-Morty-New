@@ -8,7 +8,7 @@ export const addFav = (character) => {
          try {
             const { data } = await axios.post(endpoint, character);
 
-            if(!data.lenght) throw Error('No hay favoritos')
+            // if(!data.lenght) throw Error('No hay favoritos')
 
               return dispatch({
                  type: ADD_FAV,
