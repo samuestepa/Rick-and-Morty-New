@@ -1,0 +1,13 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "prueba1",
+            "username": "rickandmorty",
+            "database": "`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/rickandmorty`"
+        }
+    ]
+}
