@@ -2,7 +2,12 @@ const express = require("express");
 const server = express();
 const router = require("./routes/index");
 const morgan = require("morgan");
-const { conn } = require('./DB_connection');
+const { conn, Favorite } = require('./DB_connection');
+const postFav = require('./controllers/postFav');
+const login = require('./controllers/login');
+const postUser = require('./controllers/postUser');
+const deleteFav = require('./controllers/deleteFav');
+const getCharById = require('./controllers/getCharById');
 const PORT = 3001;
 
 server.use(morgan("dev"))
@@ -27,6 +32,10 @@ server.use((req, res, next) => {
       
 
 server.use("/rickandmorty", router);   
+server.get('/login', login);
+server.post('/login', login);
+server.post('/fav', postFav);
+server.delete('/fav/:id', deleteFav)
       
 server.listen(PORT, ()=> {
     console.log("Server raised in port: " + PORT)})
